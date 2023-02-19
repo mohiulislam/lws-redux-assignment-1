@@ -36,12 +36,22 @@
             <!-- onsubmit="onSubmitIncrementForm(event)" -->
             <form class="incrementForm">
               <h4>Increment</h4>
-              <input type="number" name="increment" class="lws-increment" />
+              <input
+                onblur="clearField(event)"
+                type="number"
+                name="increment"
+                class="lws-increment"
+              />
             </form>
             <!-- onsubmit="onSubmitDecrementForm(event)" -->
             <form class="decrementForm">
               <h4>Decrement</h4>
-              <input type="number" name="decrement" class="lws-decrement" />
+              <input
+                onblur="clearField(event)"
+                type="number"
+                name="decrement"
+                class="lws-decrement"
+              />
             </form>
           </div>
           <div class="numbers">

@@ -89,23 +89,16 @@ function render(numOfMatch = 1) {
 }
 
 //For rendering first time
-render(1);
+render();
 
 store.subscribe(render);
 
 //For resetting
 resetBtnElm.addEventListener("click", () => {
   store.dispatch(reset());
-  allMatchContainerElm.querySelectorAll(".lws-increment").forEach((item) => {
-    item.value = null;
-  });
-  allMatchContainerElm.querySelectorAll(".lws-decrement").forEach((item) => {
-    item.value = null;
-  });
 });
 
 //Listener for adding new match.
-
 addMatchBtnElm.addEventListener("click", () => {
   //clone singleMatchElm and clean existing value If there is,to reuse element.And add new dynamic id.
   const newMatchElm = singleMatchElm.cloneNode(true);
@@ -124,7 +117,12 @@ addMatchBtnElm.addEventListener("click", () => {
   store.dispatch(increment_match("match-" + (numOfExistingMatch + 1)));
 });
 
-//event delegation
+//For input field clearing onblur
+function clearField(event) {
+  event.target.value = null;
+}
+
+//Event delegation
 allMatchContainerElm.addEventListener("submit", (event) => {
   event.preventDefault();
   if (event.target.classList.contains("incrementForm")) {
