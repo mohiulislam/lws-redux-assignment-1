@@ -1,13 +1,8 @@
 const allMatchContainerElm = document.querySelector(".all-matches");
 const singleMatchElm = document.querySelector("#match_1");
 const addMatchBtnElm = document.querySelector(".lws-addMatch");
-// const incrementFormElm = document.querySelector(".incrementForm");
-// const decrementFormElm = document.querySelector(".decrementForm");
-// const incrementFieldElm = document.querySelector(".lws-increment");
-// const decrementFieldElm = document.querySelector(".lws-decrement");
-
-// const resultElm = document.querySelector(".lws-singleResult");
 const resetBtnElm = document.querySelector(".lws-reset");
+
 const initialState = {
   scores: { match_1: 0 },
   idOfMatches: ["match-1"],
@@ -44,7 +39,6 @@ function increment_match(matchId) {
     payload: matchId,
   };
 }
-//
 
 //reducer
 function scoreReducer(state = initialState, action) {
@@ -70,9 +64,11 @@ function scoreReducer(state = initialState, action) {
       },
     };
   } else if (action.type === RESET) {
+    for (let prop in state.scores) {
+      state.scores[prop] = 0;
+    }
     return {
       ...state,
-      scores: 0,
     };
   } else if (action.type === INCREMENT_MATCH) {
     return {
@@ -91,13 +87,21 @@ function render(numOfMatch = 1) {
   );
   resultElm.innerText = store.getState().scores[`match_${numOfMatch}`];
 }
-//for rendering first time
+
+//For rendering first time
 render(1);
 
 store.subscribe(render);
 
+//For resetting
 resetBtnElm.addEventListener("click", () => {
   store.dispatch(reset());
+  allMatchContainerElm.querySelectorAll(".lws-increment").forEach((item) => {
+    item.value = null;
+  });
+  allMatchContainerElm.querySelectorAll(".lws-decrement").forEach((item) => {
+    item.value = null;
+  });
 });
 
 //Listener for adding new match.
