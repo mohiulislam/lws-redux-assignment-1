@@ -5,7 +5,7 @@ const resetBtnElm = document.querySelector(".lws-reset");
 
 const initialState = {
   scores: { match_1: 0 },
-  idOfMatches: ["match-1"],
+  idOfMatches: ["match_1"],
 };
 
 //action type
@@ -48,7 +48,7 @@ function scoreReducer(state = initialState, action) {
       scores: {
         ...state.scores,
         [action.payload.idOfMatch]:
-          state.scores[action.payload.idOfMatch] + action.payload.value,
+          (state.scores[action.payload.idOfMatch] ?? 0) + action.payload.value,
       },
     };
   } else if (action.type === DECREMENT_SCORE) {
@@ -57,9 +57,9 @@ function scoreReducer(state = initialState, action) {
       scores: {
         ...state.scores,
         [action.payload.idOfMatch]:
-          state.scores.match_1 -
-          (action.payload.value > state.scores[action.payload.idOfMatch]
-            ? state.scores.match_1
+          (state.scores[action.payload.idOfMatch] ?? 0) -
+          (action.payload.value > (state.scores[action.payload.idOfMatch] ?? 0)
+            ? state.scores[action.payload.idOfMatch] ?? 0
             : action.payload.value),
       },
     };
@@ -108,7 +108,7 @@ addMatchBtnElm.addEventListener("click", () => {
 
   //For getting existing match count and setting dynamic id to newly created match.
   numOfExistingMatch = store.getState().idOfMatches.length;
-  newMatchElm.setAttribute("id", "match-" + (numOfExistingMatch + 1));
+  newMatchElm.setAttribute("id", "match_" + (numOfExistingMatch + 1));
   allMatchContainerElm.appendChild(newMatchElm);
   newMatchElm.querySelector(".lws-matchName").innerText =
     "Match " + (numOfExistingMatch + 1);
