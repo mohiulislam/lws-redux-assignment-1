@@ -18,13 +18,13 @@ const INCREMENT_MATCH = "increment-match";
 function incrementScore(idOfMatch, value) {
   return {
     type: INCREMENT_SCORE,
-    payload: { idOfMatch: idOfMatch, value: value },
+    payload: { idOfMatch: idOfMatch, value: Math.abs(value) },
   };
 }
 function decrementScore(idOfMatch, value) {
   return {
     type: DECREMENT_SCORE,
-    payload: { idOfMatch: idOfMatch, value: value },
+    payload: { idOfMatch: idOfMatch, value: Math.abs(value) },
   };
 }
 
