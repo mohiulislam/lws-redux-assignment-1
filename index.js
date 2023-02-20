@@ -84,7 +84,7 @@ const store = Redux.createStore(scoreReducer);
 function render() {
   for (const idOfMatch in store.getState().scores) {
     const resultElm = document.querySelector(`#${idOfMatch} .lws-singleResult`);
-    resultElm.innerText = store.getState().scores[`${idOfMatch}`];
+    resultElm.textContent = store.getState().scores[`${idOfMatch}`];
   }
 }
 
@@ -104,13 +104,13 @@ addMatchBtnElm.addEventListener("click", () => {
   const newMatchElm = singleMatchElm.cloneNode(true);
   newMatchElm.querySelector(".lws-increment").value = null;
   newMatchElm.querySelector(".lws-decrement").value = null;
-  newMatchElm.querySelector(".lws-singleResult").innerText = 0;
+  newMatchElm.querySelector(".lws-singleResult").textContent = 0;
 
   //For getting existing match count and setting dynamic id to newly created match.
   numOfExistingMatch = store.getState().idOfMatches.length;
   newMatchElm.setAttribute("id", "match_" + (numOfExistingMatch + 1));
   allMatchContainerElm.appendChild(newMatchElm);
-  newMatchElm.querySelector(".lws-matchName").innerText =
+  newMatchElm.querySelector(".lws-matchName").textContent =
     "Match " + (numOfExistingMatch + 1);
 
   //Dispatch for adding match to redux store .
