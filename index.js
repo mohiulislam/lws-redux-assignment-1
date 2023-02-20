@@ -81,11 +81,11 @@ function scoreReducer(state = initialState, action) {
 }
 const store = Redux.createStore(scoreReducer);
 
-function render(numOfMatch = 1) {
-  const resultElm = document.querySelector(
-    `#match_${numOfMatch} .lws-singleResult`
-  );
-  resultElm.innerText = store.getState().scores[`match_${numOfMatch}`];
+function render() {
+  for (const idOfMatch in store.getState().scores) {
+    const resultElm = document.querySelector(`#${idOfMatch} .lws-singleResult`);
+    resultElm.innerText = store.getState().scores[`${idOfMatch}`];
+  }
 }
 
 //For rendering first time
