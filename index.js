@@ -124,8 +124,7 @@ resetBtnElm.addEventListener("click", () => {
 
 //Listener for adding new match.
 addMatchBtnElm.addEventListener("click", () => {
-  const numOfExistingMatch =
-    document.querySelectorAll(".lws-singleResult").length;
+  const numOfExistingMatch = allMatchContainerElm.children.length;
   allMatchContainerElm.insertAdjacentHTML(
     "beforeend",
     matchTemplateCreator(numOfExistingMatch)
@@ -137,7 +136,7 @@ function clearField(event) {
   event.target.value = null;
 }
 
-//Event delegation
+//Event delegation for submit.
 allMatchContainerElm.addEventListener("submit", (event) => {
   event.preventDefault();
   if (event.target.classList.contains("incrementForm")) {
