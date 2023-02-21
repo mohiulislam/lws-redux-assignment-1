@@ -107,7 +107,8 @@ function render() {
   const AllExistingMatchResultRef =
     document.querySelectorAll(".lws-singleResult");
   AllExistingMatchResultRef.forEach((SingleResultRef, index) => {
-    SingleResultRef.textContent = store.getState().scores[`match_${index + 1}`]??0;
+    SingleResultRef.textContent =
+      store.getState().scores[`match_${index + 1}`] ?? 0;
   });
 }
 
